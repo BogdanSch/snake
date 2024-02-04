@@ -1,7 +1,7 @@
 import { Block } from "./block.js";
 
 export class Snake {
-  constructor(game, gameCanvas) {
+  constructor(game, gameCanvas, color = "Blue") {
     this.game = game;
     this.gameCanvas = gameCanvas;
     this.segments = [
@@ -11,7 +11,7 @@ export class Snake {
     ];
     this.direction = "right";
     this.nextDirection = "right";
-    this.color = "blue";
+    this.color = color;
   }
 
   draw() {
@@ -42,7 +42,8 @@ export class Snake {
 
     if (newHead.equal(this.game.apple.position)) {
       this.game.scoreBoard.score++;
-      this.game.apple.move();
+      this.color = this.game.apple.color;
+      this.game.apple.move(this.game.getRandomColor());
     } else {
       this.segments.pop();
     }

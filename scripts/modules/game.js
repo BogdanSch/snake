@@ -9,9 +9,6 @@ export class SnakeGame {
     this.scoreBoard = new ScoreBoard(this.canvas);
     this.gameOverScreen = new GameOverScreen(this.canvas);
 
-    this.snake = new Snake(this, this.canvas);
-    this.apple = new Apple(this.canvas);
-
     this.directions = {
       37: "left",
       38: "up",
@@ -20,6 +17,9 @@ export class SnakeGame {
     };
     this.colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
     this.isGameOver = false;
+
+    this.snake = new Snake(this, this.canvas, this.getRandomColor());
+    this.apple = new Apple(this.canvas, this.getRandomColor());
   }
 
   start() {
@@ -50,6 +50,9 @@ export class SnakeGame {
     }, 100);
   }
 
+  getRandomColor() {
+    return this.colors[Math.floor(Math.random() * this.colors.length)];
+  }
   snakeGameover() {
     this.isGameOver = true;
     this.gameOverScreen.draw();
